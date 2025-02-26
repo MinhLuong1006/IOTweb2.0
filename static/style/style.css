@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
 /* fonts import */
-@import url("../fonts/octin_sports_rg.ttf");
+@font-face {
+  font-family: 'Octin Sports';
+  src: url("/static/fonts/octin_sports_rg.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
@@ -481,5 +486,26 @@ a:focus {
 
 #contactus {
   margin-left: 120px;
+}
+
+#but2 {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 10px 45px;
+  background-color: #fd9c6b;
+  color: #ffffff;
+  border-radius: 0;
+  border: 1px solid #fd9c6b;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+#but2:hover {
+  background-color: transparent;
+  color: #fd9c6b;
+}
+
+.error {
+  color: red;
 }
 /*# sourceMappingURL=style.css.map */

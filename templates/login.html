@@ -58,6 +58,9 @@
                 Protect your place right now
               </h2>
             </div>
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
             <p>
               <form method="post" class="form">
                 <label for="username"><b>Username:</b></label>
