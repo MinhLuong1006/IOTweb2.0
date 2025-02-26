@@ -475,8 +475,11 @@ a:focus {
 }
 
 .info_section .info_contact a i {
-  margin-right: 5px;
+  margin-left: 120px;
   width: 25px;
 }
 
+#contactus {
+  margin-left: 120px;
+}
 /*# sourceMappingURL=style.css.map */
