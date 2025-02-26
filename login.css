@@ -1,0 +1,64 @@
+:root{
+    --background: rgb(255, 0, 0);
+    --background2: rgb(0, 0, 0);
+    --text: rgb(249,208,46);
+}
+
+body {
+    background-color: var(--background2);
+    color: var(--text);
+    font-size: 30px;
+}
+.header{
+    color: var(--text);
+    text-align: center;
+    margin-top: 150px;
+}
+.form
+{
+    text-align: center ;
+    color: var(--text);
+}
+
+#but2{
+    margin-top: 50px;
+    font-size: 30px;
+    background-color: var(--background);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+
+#username
+{
+    font-size: 15px;
+    height: 30px;
+    width: 300px;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+#password
+{
+    font-size: 15px;
+    height: 30px;
+    width: 300px;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+.main
+{
+    background-color: black;
+    margin-left: 400px;
+    margin-right: 400px;
+    padding-top: 10px;
+    padding-bottom: 200px;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/dashboard.css') }}">
+</head>
+
+<body>
+    <div class="title">
+        <h1>IoT Fire Alarm And Supression System</h1>
+    </div>
+
+    <p id="number-display">Waiting for number...</p>
+
+    <button onclick="increaseTemp()">Increase Temperature</button>
+    <button onclick="decreaseTemp()">Decrease Temperature</button>
+    <button onclick="resetTemp()">Reset</button>
+
+    <div id="hotMessage" style="display: none;">
+        <h1>HOT HOT HOT!!!</h1>
+    </div>
+
+    <audio id="alarmSound" src="{{ url_for('static', filename='audio/alarm.mp3') }}"></audio>
+
+
+    <a href="{{url_for('home')}}">Log out</a>
+    <script type='text/javascript' src="{{ url_for('static', filename='scripts/dashboard.js') }}" defer></script>
+</body>
+
+</html>
