@@ -34,6 +34,10 @@ def load_user(user_id):
 def home():
     return render_template('home.html')
 
+@app.route('/register', methods=["GET", "POST"])
+def register():
+    return render_template('register.html')
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     error = None
