@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
@@ -5,21 +6,36 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'iotproject'
 
+# Setup Flask-Login
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
-# Manually stored users (username: password)
-users = {
-    "khangyeuloli25072006": "Toicodon1",
-    "hoangyeuyoungboi11506": "234",
-    "Khiemlol": "029",
-    "minhbell": "10062006",
-    "DonutdaddyTriTran2006": "Chocolatespecial25",
-    "Ducanhngo": "12345678"
+# Define user file path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get the current directory
+USER_FILE = os.path.join(BASE_DIR, "users.txt")  # Ensure users.txt is in the same folder
 
-}
+# Function to save a new user to users.txt
+def save_user(username, email, password):
+    with open(USER_FILE, "a") as file:  # Open in append mode
+        file.write(f"{username}, {email}, {password}\n")
 
-# User model for Flask-Login (not using a database)
+# Function to load users from the file into a dictionary
+def load_users():
+    users = {}
+    if os.path.exists(USER_FILE):  # Ensure the file exists
+        with open(USER_FILE, "r") as file:
+            for line in file:
+                try:
+                    username, email, password = line.strip().split(", ")
+                    users[username] = password  # Store username-password in dictionary
+                except ValueError:
+                    continue  # Skip malformed lines
+    return users
+
+# Load users into memory
+users = load_users()
+
+# User model for Flask-Login
 class User(UserMixin):
     def __init__(self, username):
         self.id = username
@@ -34,8 +50,33 @@ def load_user(user_id):
 def home():
     return render_template('home.html')
 
-@app.route('/register', methods=["GET", "POST"])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        # Ensure passwords match
+        if password != confirm_password:
+            return "Passwords do not match, please try again."
+
+        # Reload users to check if username is taken
+        global users
+        users = load_users()
+
+        if username in users:
+            return "Username already exists, please choose another one."
+
+        # Save new user to file
+        save_user(username, email, password)
+
+        # Reload users after adding a new one
+        users = load_users()
+
+        return redirect(url_for("login"))  # Redirect to login page after registration
+
     return render_template('register.html')
 
 @app.route('/login', methods=["GET", "POST"])
@@ -44,6 +85,10 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+
+        # Reload users before login attempt
+        global users
+        users = load_users()
 
         if username in users and users[username] == password:
             user = User(username)
