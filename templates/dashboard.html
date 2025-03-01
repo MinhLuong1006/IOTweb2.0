@@ -10,24 +10,66 @@
 
 <body>
     <div class="title">
-        <h1>IoT Fire Alarm And Supression System</h1>
+        <h1>IoT Fire Alarm And Suppression System</h1>
     </div>
 
-    <p id="number-display">Waiting for number...</p>
-
-    <button onclick="increaseTemp()">Increase Temperature</button>
-    <button onclick="decreaseTemp()">Decrease Temperature</button>
-    <button onclick="resetTemp()">Reset</button>
-
-    <div id="hotMessage" style="display: none;">
-        <h1>HOT HOT HOT!!!</h1>
+    
+    <div class="data-item">
+        <h2>Temperature</h2>
+        <p class="value" id="temp">Loading...</p>
     </div>
 
-    <audio id="alarmSound" src="{{ url_for('static', filename='audio/alarm.mp3') }}"></audio>
+    <div class="data-item">
+        <h2>Smoke</h2>
+        <p class="value" id="smoke">Loading...</p>
+    </div>
 
+    <div class="data-item">
+        <h2>Flame</h2>
+        <p class="value" id="flame">Loading...</p>
+    </div>
 
     <a href="{{url_for('home')}}">Log out</a>
-    <script type='text/javascript' src="{{ url_for('static', filename='scripts/dashboard.js') }}" defer></script>
+
+    <!-- Load Firebase Data -->
+    
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/dashboard.js') }}" defer></script>
+
+    <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+            import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyB-ENheeyuJs8GFQVzFNq1silxSIQk8TbM",
+        authDomain: "esp32-fire-alarm-a8fc5.firebaseapp.com",
+        databaseURL: "https://esp32-fire-alarm-a8fc5-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "esp32-fire-alarm-a8fc5",
+        storageBucket: "esp32-fire-alarm-a8fc5.firebasestorage.app",
+        messagingSenderId: "138078759671",
+        appId: "1:138078759671:web:06b4af915ffd11839681f2",
+        measurementId: "G-ZZW6Q5DB2S"
+      };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const tempRef = ref(db, "temp");
+        const smokeRef = ref(db, "smoke");
+        const flameRef = ref(db, "flame");
+   
+        onValue(tempRef, (snapshot) => {
+            document.getElementById("temp").innerHTML = snapshot.val() + "°C";
+        });
+
+        onValue(smokeRef, (snapshot) => {
+            document.getElementById("smoke").innerHTML = snapshot.val();
+        });
+
+        onValue(flameRef, (snapshot) => {
+            document.getElementById("flame").innerHTML = snapshot.val() ? "Yes" : "No";
+        });
+    </script>
 </body>
 
 </html>
