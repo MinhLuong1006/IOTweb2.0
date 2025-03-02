@@ -7,12 +7,7 @@
 </head>
 <body>
     <h1>Room 4</h1>
-    <div class="building-box"> 
-        <a href="{{url_for('building2')}}" class="slider-link"><b>Back to B2</b></a>
-    </div>
-    <div class="building-box"> 
-        <a href="{{url_for('dashboard')}}" class="slider-link"><b>Back to Dashboard</b></a>
-    </div>
+    
 
     <div class="data-item">
         <h2>Temperature</h2>
@@ -29,11 +24,11 @@
         <p class="value" id="flame4">Loading...</p>
     </div>
 
-    <a href="{{url_for('home')}}">Log out</a>
+    
 
     <!-- Load Firebase Data -->
     
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/dashboard.js') }}" defer></script>
+   
 
     <script type="module">
             import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
@@ -70,5 +65,14 @@
             document.getElementById("flame4").innerHTML = snapshot.val();
         });
     </script>
+
+    <div class="building-box"> 
+        <a href="{{url_for('building2')}}" class="slider-link"><b>Back to B2</b></a>
+    </div>
+    <div class="building-box"> 
+        <a href="{{url_for('dashboard')}}" class="slider-link"><b>Back to Dashboard</b></a>
+    </div>
+
+    <a href="{{url_for('home')}}">Log out</a>
 </body>
 </html>
