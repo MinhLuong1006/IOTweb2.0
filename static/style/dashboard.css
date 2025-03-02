@@ -20,3 +20,11 @@ body {
     font-size: 80px;
     text-align: center;   
 }
+.building1{
+   
+    background-color: white;
+    color: black;
+    padding: 50px;
+    margin-right: 800px;
+    margin-left: 500px;
+}
