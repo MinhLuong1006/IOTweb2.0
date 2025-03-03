@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<head>
+    <title>Dashboard</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/bootstrap.css') }}" />
+    <!-- font awesome style -->
+    <link href="{{ url_for('static',filename='style/font-awesome.min.css') }}" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static',filename='style/style.css') }}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="{{ url_for('static',filename='style/responsive.css') }}" rel="stylesheet" />
+
+</head>
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
- 
+
 </head>
 
 <body>
@@ -14,14 +29,14 @@
     </div>
 
 
-    <div class="building-box"> 
+    <div class="building-box">
         <a href="{{url_for('building1')}}" class="slider-link">Building 1</a>
     </div>
-    <div class="building-box"> 
+    <div class="building-box">
         <a href="{{url_for('building2')}}" class="slider-link">Building 2</a>
     </div>
-    
-   
+
+
 </body>
 
 </html>
