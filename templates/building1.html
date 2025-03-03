@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Building 1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 </head>
-<body>
-    <h1>Building 1</h1>
-    
-    <p>Here you can monitor rooms in Building 1.</p>
 
-    <div class="building-box"> 
-        <a href="{{url_for('room1')}}" class="slider-link">Room 1</a>
+<body class="building-page">
+    <div class="container">
+        <h1>Building 1</h1>
+        <p>Here you can monitor rooms in Building 1.</p>
+
+        <div class="building-box">
+            <a href="{{ url_for('room1') }}" class="slider-link">Room 1</a>
+        </div>
+        <div class="building-box">
+            <a href="{{ url_for('room2') }}" class="slider-link">Room 2</a>
+        </div>
     </div>
-    <div class="building-box"> 
-        <a href="{{url_for('room2')}}" class="slider-link">Room 2</a>
-    </div>
-    <!-- Back to Dashboard -->
-    <div class="building-box"> 
-        <a href="{{url_for('dashboard')}}" class="slider-link"><b>Back to Dashboard</b></a>
+
+    <!-- Move Back to Dashboard at the bottom -->
+    <div class="footer">
+        <a href="{{ url_for('dashboard') }}" class="slider-link"><b>Back to Dashboard</b></a>
     </div>
 </body>
+
 </html>
