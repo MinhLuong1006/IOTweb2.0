@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <!-- Site Metas -->
   <link rel="icon" href="images/favicon.png" type="image/gif" />
-  <title>Log in - Fire Detection</title>
+  <title>Login - Fire Detection</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/bootstrap.css') }}" />
@@ -30,7 +30,7 @@
       <nav class="navbar navbar-expand-lg custom_nav-container">
         <a class="navbar-brand" href="">
           <span>
-            Log in
+            Login
           </span>
         </a>
     </div>
@@ -77,7 +77,10 @@
               <button type="submit" id="but2"><b>Sign in</b></button>
             </form>
             </p>
-
+            <h6>Don't have an account?</h6>
+            <a href="{{url_for('register')}}" class="slider-link">
+              <b>Sign up</b>
+            </a>
           </div>
         </div>
       </div>
