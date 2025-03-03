@@ -192,6 +192,7 @@ a:focus {
 }
 
 /*end header section*/
+
 /* slider section */
 .slider_section {
   min-height: 100vh;
@@ -518,99 +519,3 @@ a:focus {
 .info_section {
   background-color: black;
 }
-
-/* Title Section */
-.title {
-  background-color: #ff5733;
-  /* Fire-like theme */
-  color: white;
-  padding: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-/* Building Box */
-.building-box {
-  display: inline-block;
-  background-color: white;
-  padding: 15px 30px;
-  margin: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-/* Button Styling */
-.slider-link {
-  text-decoration: none;
-  font-size: 20px;
-  color: #ff5733;
-  font-weight: bold;
-  display: block;
-  padding: 10px 20px;
-  border: 2px solid #ff5733;
-  border-radius: 8px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* Hover Effects */
-.building-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.slider-link:hover {
-  background-color: #ff5733;
-  color: white;
-}
-
-.building-box {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 15px;
-  margin: 20px;
-  display: inline-block;
-  width: 280px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease-in-out;
-}
-
-
-.slider-link {
-  font-size: 20px;
-  font-weight: bold;
-  color: #ff2e63;
-  text-decoration: none;
-  display: block;
-  padding: 12px 20px;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  background: linear-gradient(45deg, #ff8c00, #ff2e63);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease-in-out;
-}
-
-
-.building-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
-}
-
-.slider-link:hover {
-  background: linear-gradient(45deg, #4d2eff, #ff8c00);
-  color: white;
-}
-
-.building-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
-/*# sourceMappingURL=style.css.map */
