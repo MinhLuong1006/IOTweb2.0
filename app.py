@@ -77,7 +77,7 @@ def register():
 
         return redirect(url_for("login"))  # Redirect to login page after registration
 
-    return render_template('register.html')
+    return render_template('auth/register.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -97,7 +97,7 @@ def login():
         else:
             error = "Invalid username or password. Please try again."
 
-    return render_template('login.html', error=error)
+    return render_template('auth/login.html', error=error)
 
 @app.route('/dashboard')
 @login_required
@@ -113,33 +113,33 @@ def logout():
 @app.route('/building1')
 @login_required
 def building1():
-    return render_template("building1.html")
+    return render_template("building/building1.html")
 
 @app.route('/building2')
 @login_required
 def building2():
-    return render_template("building2.html")
+    return render_template("building/building2.html")
 
 
 @app.route('/room1')
 @login_required
 def room1():
-    return render_template("room1.html")
+    return render_template("rooms/room1.html")
 
 @app.route('/room2')
 @login_required
 def room2():
-    return render_template("room2.html")
+    return render_template("rooms/room2.html")
 
 
 @app.route('/room3')
 @login_required
 def room3():
-    return render_template("room3.html")
+    return render_template("rooms/room3.html")
 
 @app.route('/room4')
 @login_required
 def room4():
-    return render_template("room4.html")
+    return render_template("rooms/room4.html")
 if __name__ == '__main__':
     app.run(debug=True)
