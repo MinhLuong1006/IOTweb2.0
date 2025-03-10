@@ -76,6 +76,9 @@
               </div>
               <button type="submit" id="but2"><b>Sign in</b></button>
             </form>
+            <div class="forgot-password">
+              <a href="{{ url_for('reset_password') }}" class="reset-link"><b>Forgot Password?</b></a>
+            </div>
             </p>
             <h6>Don't have an account?</h6>
             <a href="{{url_for('register')}}" class="slider-link">
