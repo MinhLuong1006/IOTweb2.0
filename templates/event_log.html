@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Alarm Event Log</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 10px; text-align: left; }
+        th { background-color: #f4a261; color: white; }
+        button { margin-top: 10px; padding: 10px 20px; background-color: #2a9d8f; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #21867a; }
+    </style>
+</head>
+<body>
+
+    <h2>Fire Alarm Event Log</h2>
+    <button onclick="downloadExcel()">Download as Excel</button>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Room</th>
+                <th>Event Type</th>
+            </tr>
+        </thead>
+        <tbody id="logTable">
+        </tbody>
+    </table>
+
+    <script>
+        // Firebase configuration (replace with your details)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "esp32-fire-alarm-a8fc5.firebaseapp.com",
+            databaseURL: "https://esp32-fire-alarm-a8fc5-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "esp32-fire-alarm-a8fc5",
+            storageBucket: "esp32-fire-alarm-a8fc5.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Reference to event logs in Firebase
+        const logsRef = database.ref("event_logs");
+
+        // Function to add logs to the table
+        function addLogToTable(timestamp, room, eventType) {
+            const table = document.getElementById("logTable");
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${timestamp}</td>
+                <td>${room}</td>
+                <td>${eventType}</td>
+            `;
+
+            table.appendChild(row);
+        }
+
+        // Listen for changes in Firebase in real time
+        logsRef.on("value", (snapshot) => {
+    const table = document.getElementById("logTable");
+    table.innerHTML = ""; // Clear table before updating
+
+    snapshot.forEach((childSnapshot) => {
+        const log = childSnapshot.val();
+        addLogToTable(log.timestamp, log.room, log.event);
+    });
+});
+
+        // Function to export logs to an Excel file
+        function downloadExcel() {
+            const table = document.getElementById("logTable");
+            const rows = table.querySelectorAll("tr");
+            let data = [];
+
+            rows.forEach(row => {
+                let rowData = [];
+                row.querySelectorAll("td").forEach(cell => rowData.push(cell.innerText));
+                data.push(rowData);
+            });
+
+            const worksheet = XLSX.utils.aoa_to_sheet([["Timestamp", "Room", "Event Type"], ...data]);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Event Logs");
+
+            XLSX.writeFile(workbook, "Fire_Alarm_Event_Log.xlsx");
+        }
+    </script>
+
+</body>
+</html>

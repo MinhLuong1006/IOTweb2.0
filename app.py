@@ -234,5 +234,8 @@ def room3():
 def room4():
     return render_template("room4.html")
 
+@app.route('/event_log')
+def event_log():
+    return render_template('event_log.html')
 if __name__ == '__main__':
     app.run(debug=True)
