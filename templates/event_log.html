@@ -26,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Logs will be added here dynamically -->
+            <!-- Logs will be dynamically added here -->
         </tbody>
     </table>
 
@@ -55,11 +55,16 @@
 
         // Function to Add Logs to Table
         function addLogToTable(timestamp, room, event) {
-            const table = document.getElementById("logTable").getElementsByTagName('tbody')[0];
-            let newRow = table.insertRow();
-            newRow.insertCell(0).textContent = timestamp;
-            newRow.insertCell(1).textContent = room;
-            newRow.insertCell(2).textContent = event;
+            const tableBody = document.querySelector("#logTable tbody");
+            let newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+                <td>${timestamp}</td>
+                <td>${room}</td>
+                <td>${event}</td>
+            `;
+
+            tableBody.appendChild(newRow);
         }
 
         // 📡 Listen for New Logs in Real Time
@@ -69,13 +74,17 @@
         });
 
         // 📥 Export Logs to Excel
-        function downloadExcel() {
+        window.downloadExcel = function () {
             let table = document.getElementById("logTable");
             let wb = XLSX.utils.book_new();
             let ws = XLSX.utils.table_to_sheet(table);
+
+            // Adjust column widths for readability
+            ws["!cols"] = [{ wch: 20 }, { wch: 10 }, { wch: 20 }];
+
             XLSX.utils.book_append_sheet(wb, ws, "Event Logs");
             XLSX.writeFile(wb, "Fire_Alarm_Event_Log.xlsx");
-        }
+        };
     </script>
 
 </body>
