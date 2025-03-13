@@ -4,37 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fire Alarm Event Log</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid black; padding: 10px; text-align: left; }
-        th { background-color: #f4a261; color: white; }
-        button { margin-top: 10px; padding: 10px 20px; background-color: #2a9d8f; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #21867a; }
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        button { margin: 10px; padding: 10px 15px; font-size: 16px; }
     </style>
 </head>
 <body>
 
-    <h2>Fire Alarm Event Log</h2>
-    <button onclick="downloadExcel()">Download as Excel</button>
+    <h2>🔥 Fire Alarm Event Log 🔥</h2>
     
-    <table>
+    <table id="logTable">
         <thead>
             <tr>
                 <th>Timestamp</th>
                 <th>Room</th>
-                <th>Event Type</th>
+                <th>Event</th>
             </tr>
         </thead>
-        <tbody id="logTable">
+        <tbody>
+            <!-- Logs will be added here dynamically -->
         </tbody>
     </table>
 
-    <script>
-        // Firebase configuration (replace with your details)
+    <button onclick="downloadExcel()">📥 Download as Excel</button>
+
+    <!-- Firebase SDK (Modular Version) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, onChildAdded } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+        // 🔥 Firebase Configuration
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "esp32-fire-alarm-a8fc5.firebaseapp.com",
@@ -45,55 +48,33 @@
             appId: "YOUR_APP_ID"
         };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        // 🔥 Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const logsRef = ref(database, "event_logs");
 
-        // Reference to event logs in Firebase
-        const logsRef = database.ref("event_logs");
-
-        // Function to add logs to the table
-        function addLogToTable(timestamp, room, eventType) {
-            const table = document.getElementById("logTable");
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
-                <td>${timestamp}</td>
-                <td>${room}</td>
-                <td>${eventType}</td>
-            `;
-
-            table.appendChild(row);
+        // Function to Add Logs to Table
+        function addLogToTable(timestamp, room, event) {
+            const table = document.getElementById("logTable").getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+            newRow.insertCell(0).textContent = timestamp;
+            newRow.insertCell(1).textContent = room;
+            newRow.insertCell(2).textContent = event;
         }
 
-        // Listen for changes in Firebase in real time
-        logsRef.on("value", (snapshot) => {
-    const table = document.getElementById("logTable");
-    table.innerHTML = ""; // Clear table before updating
+        // 📡 Listen for New Logs in Real Time
+        onChildAdded(logsRef, (snapshot) => {
+            const log = snapshot.val();
+            addLogToTable(log.timestamp, log.room, log.event);
+        });
 
-    snapshot.forEach((childSnapshot) => {
-        const log = childSnapshot.val();
-        addLogToTable(log.timestamp, log.room, log.event);
-    });
-});
-
-        // Function to export logs to an Excel file
+        // 📥 Export Logs to Excel
         function downloadExcel() {
-            const table = document.getElementById("logTable");
-            const rows = table.querySelectorAll("tr");
-            let data = [];
-
-            rows.forEach(row => {
-                let rowData = [];
-                row.querySelectorAll("td").forEach(cell => rowData.push(cell.innerText));
-                data.push(rowData);
-            });
-
-            const worksheet = XLSX.utils.aoa_to_sheet([["Timestamp", "Room", "Event Type"], ...data]);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Event Logs");
-
-            XLSX.writeFile(workbook, "Fire_Alarm_Event_Log.xlsx");
+            let table = document.getElementById("logTable");
+            let wb = XLSX.utils.book_new();
+            let ws = XLSX.utils.table_to_sheet(table);
+            XLSX.utils.book_append_sheet(wb, ws, "Event Logs");
+            XLSX.writeFile(wb, "Fire_Alarm_Event_Log.xlsx");
         }
     </script>
 
