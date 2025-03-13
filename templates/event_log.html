@@ -75,16 +75,36 @@
 
         // 📥 Export Logs to Excel
         window.downloadExcel = function () {
-            let table = document.getElementById("logTable");
-            let wb = XLSX.utils.book_new();
-            let ws = XLSX.utils.table_to_sheet(table);
+    let table = document.getElementById("logTable");
+    let wb = XLSX.utils.book_new();
+    let ws = XLSX.utils.aoa_to_sheet([["Timestamp (GMT+7)", "Room", "Event"]]); // Header
 
-            // Adjust column widths for readability
-            ws["!cols"] = [{ wch: 20 }, { wch: 10 }, { wch: 20 }];
+    let rows = document.querySelectorAll("#logTable tbody tr");
 
-            XLSX.utils.book_append_sheet(wb, ws, "Event Logs");
-            XLSX.writeFile(wb, "Fire_Alarm_Event_Log.xlsx");
-        };
+    rows.forEach(row => {
+        let cells = row.querySelectorAll("td");
+        let timestampText = cells[0].textContent; // Original timestamp as string
+
+        // ✅ Convert to JavaScript Date
+        let timestamp = new Date(timestampText);
+
+        // ✅ Adjust to GMT+7 manually
+        timestamp.setHours(timestamp.getHours() + 7);  
+
+        // ✅ Format as "YYYY-MM-DD HH:MM:SS"
+        let formattedTimestamp = timestamp.toISOString().replace("T", " ").substring(0, 19);
+
+        XLSX.utils.sheet_add_aoa(ws, [[formattedTimestamp, cells[1].textContent, cells[2].textContent]], { origin: -1 });
+    });
+
+    // ✅ Ensure proper column width
+    ws["!cols"] = [{ wch: 25 }, { wch: 10 }, { wch: 20 }];
+
+    XLSX.utils.book_append_sheet(wb, ws, "Event Logs");
+    XLSX.writeFile(wb, "Fire_Alarm_Event_Log.xlsx");
+};
+
+
     </script>
 
 </body>
