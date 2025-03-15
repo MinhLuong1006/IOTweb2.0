@@ -92,7 +92,7 @@ def register():
 
         return redirect(url_for("login"))  # Redirect to login page after registration
 
-    return render_template('register.html')
+    return render_template('authentication/register.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -112,12 +112,12 @@ def login():
         else:
             error = "Invalid username or password. Please try again."
 
-    return render_template('login.html', error=error)
+    return render_template('authentication/login.html', error=error)
 
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template("dashboard.html", username=current_user.id)
+    return render_template("features/dashboard.html", username=current_user.id)
 
 @app.route('/logout')
 @login_required
@@ -157,7 +157,7 @@ def reset_password():
 
         return "Password reset link sent to your email."
 
-    return render_template('reset_password.html')
+    return render_template('authentication/reset_password.html')
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_with_token(token):
@@ -201,41 +201,41 @@ def reset_with_token(token):
 
         return redirect(url_for("login"))
 
-    return render_template("reset_with_token.html")
+    return render_template("authentication/reset_with_token.html")
 
 # Keep all your room and building routes
 @app.route('/building1')
 @login_required
 def building1():
-    return render_template("building1.html")
+    return render_template("buildings/building1.html")
 
 @app.route('/building2')
 @login_required
 def building2():
-    return render_template("building2.html")
+    return render_template("buildings/building2.html")
 
 @app.route('/room1')
 @login_required
 def room1():
-    return render_template("room1.html")
+    return render_template("rooms/room1.html")
 
 @app.route('/room2')
 @login_required
 def room2():
-    return render_template("room2.html")
+    return render_template("rooms/room2.html")
 
 @app.route('/room3')
 @login_required
 def room3():
-    return render_template("room3.html")
+    return render_template("rooms/room3.html")
 
 @app.route('/room4')
 @login_required
 def room4():
-    return render_template("room4.html")
+    return render_template("rooms/room4.html")
 
 @app.route('/event_log')
 def event_log():
-    return render_template('event_log.html')
+    return render_template('features/event_log.html')
 if __name__ == '__main__':
     app.run(debug=True)
