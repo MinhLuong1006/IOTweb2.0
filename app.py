@@ -203,7 +203,7 @@ def reset_with_token(token):
 
     return render_template("auth/reset_with_token.html")
 
-# Keep all your room and building routes
+# rooms and buildings routes
 @app.route('/building1')
 @login_required
 def building1():
@@ -237,5 +237,22 @@ def room4():
 @app.route('/event_log')
 def event_log():
     return render_template('features/event_log.html')
+
+@app.route('/event_log_r1')
+def event_log_r1():
+    return render_template('features/event_log_r1.html')
+
+@app.route('/event_log_r2')
+def event_log_r2():
+    return render_template('features/event_log_r2.html')
+
+@app.route('/event_log_r3')
+def event_log_r3():
+    return render_template('features/event_log_r3.html')
+
+@app.route('/event_log_r4')
+def event_log_r4():
+    return render_template('features/event_log_r4.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

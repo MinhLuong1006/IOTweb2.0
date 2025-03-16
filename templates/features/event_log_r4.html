@@ -54,7 +54,7 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-        const logsRef = ref(database, "event_logs");
+        const logsRef = ref(database, "room_logs/Room4");
 
         // Function to Add Logs to Table
         function addLogToTable(timestamp, room, event) {
@@ -116,7 +116,7 @@
             ws["!cols"] = [{ wch: 25 }, { wch: 10 }, { wch: 20 }];
 
             XLSX.utils.book_append_sheet(wb, ws, "Event Logs");
-            XLSX.writeFile(wb, "Event_Log.xlsx");
+            XLSX.writeFile(wb, "Room4_Log.xlsx");
         };
     </script>
 
