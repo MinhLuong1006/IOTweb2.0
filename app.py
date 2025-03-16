@@ -9,11 +9,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'iotproject'
 
 # Flask-Mail configuration
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Use your mail provider if different
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'minhluong10062006@gmail.com'  # Change to your email
-app.config['MAIL_PASSWORD'] = 'pclg gmfq phec uits'  # Use the App Password from Google
+app.config['MAIL_USERNAME'] = 'minhluong10062006@gmail.com'  
+app.config['MAIL_PASSWORD'] = 'pclg gmfq phec uits'  # App Password from Google
 app.config['MAIL_DEFAULT_SENDER'] = 'minhluong10062006@gmail.com'
 
 mail = Mail(app)
