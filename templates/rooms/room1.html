@@ -68,6 +68,14 @@
         </div>
     </div>
 
+    <div class="building-box"> 
+        <a href="{{url_for('building1')}}" class="slider-link"><b>Back to Building 1</b></a>
+    </div>
+
+    <div class="building-box"> 
+        <a href="{{url_for('event_log_r1')}}" class="slider-link">Events</a>
+    </div>
+    
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
@@ -99,10 +107,9 @@
                 this.ctx = ctx;
                 this.maxDataPoints = 10;
 
-                // Create gradient background
                 const gradient = this.ctx.createLinearGradient(0, 0, 0, 200);
-                gradient.addColorStop(0, color + "AA");  // Semi-transparent color
-                gradient.addColorStop(1, color + "22");  // Lighter fade-out color
+                gradient.addColorStop(0, color + "AA");
+                gradient.addColorStop(1, color + "22");
 
                 this.chartData = {
                     labels: [],
@@ -111,9 +118,9 @@
                         borderColor: color, 
                         backgroundColor: gradient, 
                         data: [],
-                        borderWidth: 3, // Thicker lines
-                        pointBackgroundColor: color, // Make points colorful
-                        pointRadius: 5, // Bigger data points
+                        borderWidth: 3,
+                        pointBackgroundColor: color,
+                        pointRadius: 5,
                         pointHoverRadius: 7
                     }]
                 };
@@ -128,11 +135,11 @@
                         scales: {
                             x: { 
                                 ticks: { autoSkip: true, maxTicksLimit: 5, color: "#555" },
-                                grid: { color: "#DDD" } // Light gray grid
+                                grid: { color: "#DDD" }
                             },
                             y: { 
-                                min: label === "Temperature" ? null : 0, 
-                                max: label === "Temperature" ? null : 1,
+                                min: label === "Temperature" ? 0 : 0, 
+                                max: label === "Temperature" ? 200 : 1,
                                 ticks: { color: "#555" },
                                 grid: { color: "#DDD" } 
                             }
@@ -145,21 +152,25 @@
             }
 
             updateChart(value) {
-                const timestamp = new Date().toLocaleTimeString();
+                const now = new Date();
+                const timestamp = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+
                 if (this.chartData.labels.length >= this.maxDataPoints) {
                     this.chartData.labels.shift();
                     this.chartData.datasets[0].data.shift();
                 }
+
                 this.chartData.labels.push(timestamp);
                 this.chartData.datasets[0].data.push(value);
-                this.chart.update();
+
+                this.chart.update('none'); // Prevent animation lag
             }
         }
 
         function loadCharts() {
-            const tempChart = new LiveChart(document.getElementById("tempChart").getContext("2d"), "Temperature", "#FF0000"); // Bright Red
-            const smokeChart = new LiveChart(document.getElementById("smokeChart").getContext("2d"), "Smoke", "#4B4B4B"); // Dark Gray
-            const flameChart = new LiveChart(document.getElementById("flameChart").getContext("2d"), "Flame", "#FFA500"); // Bright Orange
+            const tempChart = new LiveChart(document.getElementById("tempChart").getContext("2d"), "Temperature", "#FF0000");
+            const smokeChart = new LiveChart(document.getElementById("smokeChart").getContext("2d"), "Smoke", "#4B4B4B");
+            const flameChart = new LiveChart(document.getElementById("flameChart").getContext("2d"), "Flame", "#FFA500");
 
             onValue(tempRef, snapshot => tempChart.updateChart(snapshot.val()));
             onValue(smokeRef, snapshot => smokeChart.updateChart(snapshot.val()));
