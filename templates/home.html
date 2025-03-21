@@ -8,19 +8,18 @@
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <!-- Site Metas -->
-  <link rel="icon" href="{{ url_for('static',filename='images/favicon.png') }}" type="image/gif" />
+  <link rel="icon" href="../static/images/favicon.png" type="image/gif" />
 
   <title>Home - Fire Detection</title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/bootstrap.css') }}" />
+  <link rel="stylesheet" type="text/css" href="../static/style/bootstrap.css" />
   <!-- font awesome style -->
-  <link href="{{ url_for('static',filename='style/font-awesome.min.css') }}" rel="stylesheet" />
+  <link href="../static/style/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
-  <link href="{{ url_for('static',filename='style/style.css') }}" rel="stylesheet" />
+  <link href="../static/style/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="{{ url_for('static',filename='style/responsive.css') }}" rel="stylesheet" />
-
+  <link href="../static/style/responsive.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -29,13 +28,11 @@
   <header class="header_section">
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg custom_nav-container">
-        <a class="navbar-brand" href="">
+        <a class="navbar-brand">
           <span>
             Home
           </span>
         </a>
-        <div class="" id="">
-        </div>
       </nav>
     </div>
   </header>
@@ -44,7 +41,7 @@
   <!-- slider section -->
   <section class="slider_section position-relative">
     <div class="slider_bg_box">
-      <img src="{{ url_for('static',filename='images/slider-bg.jpg') }}" alt="">
+      <img src="../static/images/slider-bg.jpg" alt="">
     </div>
     <div class="slider_bg"></div>
     <div class="container">
@@ -54,19 +51,15 @@
             FIRE ALARM AND
             <br> SUPPRESSION SYSTEM
           </h1>
-          <p>
-
-          </p>
-          <div>
-            <a href="{{url_for('login')}}" class="slider-link">
-              Log in
-            </a>
-            <a href="{{url_for('register')}}" class="slider-link">
-              Sign up
-            </a>
-          </div>
+          <a href="login" class="slider-link">
+            Log in
+          </a>
+          <a href="register" class="slider-link">
+            Sign up
+          </a>
         </div>
       </div>
+    </div>
     </div>
   </section>
   <!-- end slider section -->
@@ -79,7 +72,7 @@
           <h4>About Us</h4>
           <div id="memberCard" class="card" style="width: 18rem;">
             <div class="img-container" style="width: 100%; height: 200px; overflow: hidden;">
-              <img id="memberImage" src="{{ url_for('static',filename='images/p1.jpg') }}" class="card-img-top" alt=""
+              <img id="memberImage" src="../static/images/p1.jpg" class="card-img-top" alt=""
                 style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div class="card-body text-center">
@@ -102,13 +95,13 @@
 
   <script>
     const members = [
-      { name: "Luc Gia Nghi Anh", id: "104240328", img: "{{ url_for('static',filename='images/p1.jpg') }}" },
-      { name: "Luong Nguyen Gia Minh", id: "104240035", img: "{{ url_for('static',filename='images/p2.0.jpg') }}" },
-      { name: "Nguyen Tran Khang", id: "104240009", img: "{{ url_for('static',filename='images/p2.1.jpg') }}" },
-      { name: "Ngo Duc Anh", id: "104240148", img: "{{ url_for('static',filename='images/p2.2.jpg') }}" },
-      { name: "Tran Dang Tri", id: "104240185", img: "{{ url_for('static',filename='images/p2.3.jpg') }}" },
-      { name: "Tran Tri Khiem", id: "104240559", img: "{{ url_for('static',filename='images/p2.4.jpg') }}" },
-      { name: "Tran Huu Duy Hoang", id: "104240552", img: "{{ url_for('static',filename='images/p2.5.jpg') }}" }
+      { name: "Luc Gia Nghi Anh", id: "104240328", img: "../static/images/p1.jpg" },
+      { name: "Luong Nguyen Gia Minh", id: "104240035", img: "../static/images/p2.0.jpg" },
+      { name: "Nguyen Tran Khang", id: "104240009", img: "../static/images/p2.1.jpg" },
+      { name: "Ngo Duc Anh", id: "104240148", img: "../static/images/p2.2.jpg" },
+      { name: "Tran Dang Tri", id: "104240185", img: "../static/images/p2.3.jpg" },
+      { name: "Tran Tri Khiem", id: "104240559", img: "../static/images/p2.4.jpg" },
+      { name: "Tran Huu Duy Hoang", id: "104240552", img: "../static/images/p2.5.jpg" }
     ];
 
     let currentIndex = 0;
@@ -128,14 +121,12 @@
   </script>
   <!-- end info_section -->
 
-
-
   <!-- jQery -->
-  <script src="{{ url_for('static',filename='scripts/jquery-3.4.1.min.js') }}"></script>
+  <script src="../static/scripts/jquery-3.4.1.min.js"></script>
   <!-- bootstrap js -->
-  <script src="{{ url_for('static',filename='scripts/bootstrap.js') }}"></script>
+  <script src="../static/scripts/bootstrap.js"></script>
   <!-- custom js -->
-  <script src="{{ url_for('static',filename='scripts/custom.js') }}"></script>
+  <script src="../static/scripts/custom.js"></script>
 
 </body>
 
