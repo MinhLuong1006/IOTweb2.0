@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<head>
-    <link href="{{ url_for('static', filename='style/dashboard.css') }}" rel="stylesheet" />
-</head>
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
-
+ 
 </head>
 
 <body>
@@ -20,14 +14,12 @@
     </div>
 
 
-    <div class="building-box">
+    <div class="building-box"> 
         <a href="{{url_for('building1')}}" class="slider-link">Building 1</a>
     </div>
-
-    <div class="building-box">
+    <div class="building-box"> 
         <a href="{{url_for('building2')}}" class="slider-link">Building 2</a>
     </div>
-
     
     <div class="building-box"> 
         <a href="{{url_for('event_log')}}" class="slider-link">Events</a>
@@ -36,7 +28,7 @@
     <div class="building-box"> 
         <a href="{{url_for('logout')}}" class="slider-link">Logout</a>
     </div>
-
+   
 </body>
 
 </html>
