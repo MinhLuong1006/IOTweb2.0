@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
 
 /* fonts import */
@@ -518,4 +519,59 @@ a:focus {
 
 .info_section {
   background-color: black;
+=======
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Title Section */
+.title {
+    background-color: #ff5733;
+    /* Fire-like theme */
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Building Box */
+.building-box {
+    display: inline-block;
+    background-color: white;
+    padding: 15px 30px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Button Styling */
+.slider-link {
+    text-decoration: none;
+    font-size: 20px;
+    color: #ff5733;
+    font-weight: bold;
+    display: block;
+    padding: 10px 20px;
+    border: 2px solid #ff5733;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover Effects */
+.building-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.slider-link:hover {
+    background-color: #ff5733;
+    color: white;
+
 }

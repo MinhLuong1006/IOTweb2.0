@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -20,9 +21,24 @@
   <link href="../../static/style/building.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="../../static/style/responsive.css" rel="stylesheet" />
+
+<html lang="en">
+
+<head>
+    <title>Building 1</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/bootstrap.css') }}" />
+    <!-- font awesome style -->
+    <link href="{{ url_for('static',filename='style/font-awesome.min.css') }}" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static',filename='style/building.css') }}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="{{ url_for('static',filename='style/responsive.css') }}" rel="stylesheet" />
+
 </head>
 
 <body>
+
 
   <!-- header section strats -->
   <header class="header_section">
@@ -72,6 +88,24 @@
         </div>
       </div>
     </div>
+
+    <div class="title">
+        <h1>Building 1</h1>
+        <p>Here you can monitor rooms in Building 1.</p>
+    </div>
+
+    <div class="building-box">
+        <a href="{{ url_for('room1') }}" class="slider-link">Room 1</a>
+    </div>
+    <div class="building-box">
+        <a href="{{ url_for('room2') }}" class="slider-link">Room 2</a>
+    </div>
+
+
+    <!-- Move Back to Dashboard at the bottom -->
+    <div class="footer">
+        <a href="{{ url_for('dashboard') }}" class="slider-link"><b>Back to Dashboard</b></a>
+
     </div>
   </section>
   <!-- end slider section -->
