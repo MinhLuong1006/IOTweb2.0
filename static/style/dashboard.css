@@ -130,7 +130,7 @@ h2 {
 .overlay a {
   padding: 0px;
   text-decoration: none;
-  font-size: 22px;
+  font-size: 20px;
   color: #FFD1DC;
   display: block;
   -webkit-transition: 0.3s;
@@ -232,12 +232,12 @@ a:focus {
 }
 
 .slider_section .detail-box .slider-link {
-  display: inline-block;
+  display: block;
   padding: 10px 45px;
   background-color: transparent;
-  color: #fd9c6b;
+  color: #ffffff;
   border-radius: 5px;
-  border: 1px solid #fd9c6b;
+  border: 1px solid #ffffff;
   -webkit-transition: all .2s;
   transition: all .2s;
   margin-top: 35px;
