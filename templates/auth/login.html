@@ -57,8 +57,9 @@
                 Protect your place right now
               </h2>
             </div>
-            <!-- Error message placeholder (for JavaScript or backend integration) -->
-            <p id="error-message" class="error" style="display: none;"></p>
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
             <p>
             <form method="post" class="form">
               <label for="username"><b>Username:</b></label>
@@ -75,6 +76,10 @@
               <button type="submit" id="but2"><b>Sign in</b></button>
             </form>
             </p>
+            <h6>Forgot your password?</h6>
+              <a href="{{url_for('reset_password')}}" class="reset-link">
+                <b>Reset Password</b>
+              </a>
             <h6>Don't have an account?</h6>
             <a href="register" class="slider-link">
               <b>Sign up</b>
