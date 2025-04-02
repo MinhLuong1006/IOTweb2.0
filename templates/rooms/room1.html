@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- For Alerts -->
     <style>
         body {
             display: flex;
@@ -98,19 +99,59 @@
         const smokeRef = ref(db, "b1/r1/smoke1");
         const flameRef = ref(db, "b1/r1/flame1");
 
-        onValue(tempRef, snapshot => { document.getElementById("temp1").innerHTML = snapshot.val() + "°C"; });
-        onValue(smokeRef, snapshot => { document.getElementById("smoke1").innerHTML = snapshot.val(); });
-        onValue(flameRef, snapshot => { document.getElementById("flame1").innerHTML = snapshot.val(); });
+        const tempRef2 = ref(db, "b1/r2/temp2");
+        const smokeRef2 = ref(db, "b1/r2/smoke2");
+        const flameRef2 = ref(db, "b1/r2/flame2");
 
+        let fireAlertShown = false; // Prevent multiple alerts
+
+        function checkFireCondition(temp, smoke, flame) {
+            if (temp > 50 || smoke > 0 || flame > 0) {
+                if (!fireAlertShown) {
+                    Swal.fire({
+                        title: "🔥 Fire Alert!",
+                        text: "Fire detected in Room 1!",
+                        icon: "warning",
+                        confirmButtonText: "OK",
+                        timer: 10000
+                    });
+                    fireAlertShown = true;
+                }
+            } else {
+                fireAlertShown = false; // Reset alert if conditions return to normal
+            }
+        }
+
+       
+
+        onValue(tempRef, snapshot => { 
+            const temp = snapshot.val();
+            document.getElementById("temp1").innerHTML = temp + "°C";
+            checkFireCondition(temp, parseInt(document.getElementById("smoke1").textContent), parseInt(document.getElementById("flame1").textContent));
+        });
+
+        onValue(smokeRef, snapshot => { 
+            const smoke = snapshot.val();
+            document.getElementById("smoke1").innerHTML = smoke;
+            checkFireCondition(parseInt(document.getElementById("temp1").textContent), smoke, parseInt(document.getElementById("flame1").textContent));
+        });
+
+        onValue(flameRef, snapshot => { 
+            const flame = snapshot.val();
+            document.getElementById("flame1").innerHTML = flame;
+            checkFireCondition(parseInt(document.getElementById("temp1").textContent), parseInt(document.getElementById("smoke1").textContent), flame);
+        });
+
+        ////
+        
         class LiveChart {
             constructor(ctx, label, color) {
                 this.ctx = ctx;
                 this.maxDataPoints = 10;
 
-                // Create gradient background
                 const gradient = this.ctx.createLinearGradient(0, 0, 0, 200);
-                gradient.addColorStop(0, color + "AA");  // Semi-transparent color
-                gradient.addColorStop(1, color + "22");  // Lighter fade-out color
+                gradient.addColorStop(0, color + "AA");
+                gradient.addColorStop(1, color + "22");
 
                 this.chartData = {
                     labels: [],
@@ -119,9 +160,9 @@
                         borderColor: color, 
                         backgroundColor: gradient, 
                         data: [],
-                        borderWidth: 3, // Thicker lines
-                        pointBackgroundColor: color, // Make points colorful
-                        pointRadius: 5, // Bigger data points
+                        borderWidth: 3,
+                        pointBackgroundColor: color,
+                        pointRadius: 5,
                         pointHoverRadius: 7
                     }]
                 };
@@ -136,7 +177,7 @@
                         scales: {
                             x: { 
                                 ticks: { autoSkip: true, maxTicksLimit: 5, color: "#555" },
-                                grid: { color: "#DDD" } // Light gray grid
+                                grid: { color: "#DDD" }
                             },
                             y: { 
                                 min: label === "Temperature" ? null : 0, 
@@ -165,9 +206,9 @@
         }
 
         function loadCharts() {
-            const tempChart = new LiveChart(document.getElementById("tempChart").getContext("2d"), "Temperature", "#FF0000"); // Bright Red
-            const smokeChart = new LiveChart(document.getElementById("smokeChart").getContext("2d"), "Smoke", "#4B4B4B"); // Dark Gray
-            const flameChart = new LiveChart(document.getElementById("flameChart").getContext("2d"), "Flame", "#FFA500"); // Bright Orange
+            const tempChart = new LiveChart(document.getElementById("tempChart").getContext("2d"), "Temperature", "#FF0000");
+            const smokeChart = new LiveChart(document.getElementById("smokeChart").getContext("2d"), "Smoke", "#4B4B4B");
+            const flameChart = new LiveChart(document.getElementById("flameChart").getContext("2d"), "Flame", "#FFA500");
 
             onValue(tempRef, snapshot => tempChart.updateChart(snapshot.val()));
             onValue(smokeRef, snapshot => smokeChart.updateChart(snapshot.val()));
