@@ -3,9 +3,11 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
-
+from flask_socketio import SocketIO
+import firebase_admin
+from firebase_admin import credentials, db
 app = Flask(__name__)
-
+socketio = SocketIO(app) 
 app.config['SECRET_KEY'] = 'iotproject'
 
 # Flask-Mail configuration
@@ -255,4 +257,4 @@ def event_log_r4():
     return render_template('features/event_log_r4.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)

@@ -76,7 +76,7 @@
     <div class="building-box"> 
         <a href="{{url_for('event_log_r1')}}" class="slider-link">Events</a>
     </div>
-
+    <script src="{{ url_for('static', filename='scripts/fireAlert.js') }}" type="module"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
@@ -99,28 +99,7 @@
         const smokeRef = ref(db, "b1/r1/smoke1");
         const flameRef = ref(db, "b1/r1/flame1");
 
-        const tempRef2 = ref(db, "b1/r2/temp2");
-        const smokeRef2 = ref(db, "b1/r2/smoke2");
-        const flameRef2 = ref(db, "b1/r2/flame2");
-
-        let fireAlertShown = false; // Prevent multiple alerts
-
-        function checkFireCondition(temp, smoke, flame) {
-            if (temp > 50 || smoke > 0 || flame > 0) {
-                if (!fireAlertShown) {
-                    Swal.fire({
-                        title: "🔥 Fire Alert!",
-                        text: "Fire detected in Room 1!",
-                        icon: "warning",
-                        confirmButtonText: "OK",
-                        timer: 10000
-                    });
-                    fireAlertShown = true;
-                }
-            } else {
-                fireAlertShown = false; // Reset alert if conditions return to normal
-            }
-        }
+        
 
        
 
