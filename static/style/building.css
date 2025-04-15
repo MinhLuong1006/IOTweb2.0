@@ -180,15 +180,21 @@ a:focus {
   box-shadow: none;
 }
 
-.navbar-brand {
+.navbar-brand:link {
   margin-top: 10px;
-}
-
-.navbar-brand span {
-  font-size: 24px;
-  font-weight: 700;
   color: #ffffff;
-  text-transform: uppercase;
+  transition-duration: 0.4s;
+}
+.navbar-brand:hover {
+  color: #fd9c6b
+}
+.navbar-brand:active {
+  color:#fd9c6b;
+  opacity: 0.8;
+}
+.navbar-brand:visited {
+  color: #ffffff;
+  opacity: 0.8;
 }
 
 /*end header section*/
