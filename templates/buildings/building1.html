@@ -4,7 +4,10 @@
 
 <head>
   <!-- Basic -->
+<<<<<<< HEAD
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- For Alerts -->
+=======
+>>>>>>> fb10af6ff30ff82ec4d774fbf03581a6c0c3a033
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Mobile Metas -->
@@ -67,6 +70,7 @@
           <h1>
             BUILDING 1
           </h1>
+<<<<<<< HEAD
           
           <a href="room1" class="slider-link" id="room1-box">
             ROOM 1
@@ -80,6 +84,26 @@
             <br><br> Temp: <span id="temp2"></span>
             <br><br> Smoke: <span id="smoke2"></span>
             <br><br> Flame: <span id="flame2"></span>
+=======
+          <a href="room1" class="slider-link">
+            ROOM 1
+            <br>
+            <br> Temp:
+            <br>
+            <br> Smoke:
+            <br>
+            <br> Flame:
+            <br>
+          </a>
+          <a href="room2" class="slider-link">
+            ROOM 2
+            <br>
+            <br> Temp:
+            <br>
+            <br> Smoke:
+            <br>
+            <br> Flame:
+>>>>>>> fb10af6ff30ff82ec4d774fbf03581a6c0c3a033
           </a>
         </div>
       </div>
@@ -96,7 +120,11 @@
     <div class="building-box">
         <a href="{{ url_for('room2') }}" class="slider-link">Room 2</a>
     </div>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fb10af6ff30ff82ec4d774fbf03581a6c0c3a033
 
     <!-- Move Back to Dashboard at the bottom -->
     <div class="footer">
@@ -170,6 +198,7 @@
   <!-- custom js -->
   <script src="../static/scripts/custom.js"></script>
 
+<<<<<<< HEAD
 
   <audio id="fireAlarmSound" src="{{ url_for('static', filename='alarm.mp3') }}"></audio>
   <script src="{{ url_for('static', filename='scripts/sendemail1.js') }}"></script>
@@ -229,6 +258,8 @@
     bindSensor("b1/r2/flame2", "flame2");
 </script>
 
+=======
+>>>>>>> fb10af6ff30ff82ec4d774fbf03581a6c0c3a033
 </body>
 
 </html>

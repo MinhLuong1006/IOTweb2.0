@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fire Alarm Event Log</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 8px; text-align: center; }
-        th { background-color: #f2f2f2; }
-        button { margin: 10px; padding: 10px 15px; font-size: 16px; }
-        #deleteButton { background-color: red; color: white; border: none; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        #deleteButton {
+            background-color: red;
+            color: white;
+            border: none;
+        }
     </style>
 </head>
+
 <body>
 
     <h2>Fire Alarm Event Log of Room 4</h2>
-    
+
     <table id="logTable">
         <thead>
             <tr>
@@ -49,7 +78,7 @@
             messagingSenderId: "138078759671",
             appId: "1:138078759671:web:06b4af915ffd11839681f2",
             measurementId: "G-ZZW6Q5DB2S"
-            };
+        };
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -104,7 +133,7 @@
                 let timestamp = new Date(timestampText);
 
                 // Adjust to GMT+7 manually
-                timestamp.setHours(timestamp.getHours() + 7);  
+                timestamp.setHours(timestamp.getHours() + 7);
 
                 // Format as "YYYY-MM-DD HH:MM:SS"
                 let formattedTimestamp = timestamp.toISOString().replace("T", " ").substring(0, 19);
@@ -120,11 +149,6 @@
         };
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<audio id="fireAlarmSound" src="{{ url_for('static', filename='alarm.mp3') }}"></audio>
-<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm1.js') }}"></script>
-<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm2.js') }}"></script>
-<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm3.js') }}"></script>
-<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm4.js') }}"></script>
 </body>
+
 </html>

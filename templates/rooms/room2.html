@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +47,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="sensor-data">
         <h1>Room 2</h1>
@@ -69,17 +71,14 @@
         </div>
     </div>
 
-<<<<<<< Updated upstream
-=======
-    <div class="building-box"> 
+    <div class="building-box">
         <a href="{{url_for('building1')}}" class="slider-link"><b>Back to Building 1</b></a>
     </div>
 
-    <div class="building-box"> 
+    <div class="building-box">
         <a href="{{url_for('event_log_r2')}}" class="slider-link">Events</a>
     </div>
-  
->>>>>>> Stashed changes
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
@@ -102,25 +101,25 @@
         const smokeRef = ref(db, "b1/r2/smoke2");
         const flameRef = ref(db, "b1/r2/flame2");
 
-       
 
 
-        onValue(tempRef, snapshot => { 
+
+        onValue(tempRef, snapshot => {
             const temp = snapshot.val();
             document.getElementById("temp2").innerHTML = temp + "°C";
-            
+
         });
 
-        onValue(smokeRef, snapshot => { 
+        onValue(smokeRef, snapshot => {
             const smoke = snapshot.val();
             document.getElementById("smoke2").innerHTML = smoke;
-            
+
         });
 
-        onValue(flameRef, snapshot => { 
+        onValue(flameRef, snapshot => {
             const flame = snapshot.val();
             document.getElementById("flame2").innerHTML = flame;
-            
+
         });
 
 
@@ -135,10 +134,10 @@
 
                 this.chartData = {
                     labels: [],
-                    datasets: [{ 
-                        label, 
-                        borderColor: color, 
-                        backgroundColor: gradient, 
+                    datasets: [{
+                        label,
+                        borderColor: color,
+                        backgroundColor: gradient,
                         data: [],
                         borderWidth: 3,
                         pointBackgroundColor: color,
@@ -155,15 +154,15 @@
                         maintainAspectRatio: false,
                         animation: { duration: 500, easing: "easeInOutQuad" },
                         scales: {
-                            x: { 
+                            x: {
                                 ticks: { autoSkip: true, maxTicksLimit: 5, color: "#555" },
                                 grid: { color: "#DDD" }
                             },
-                            y: { 
-                                min: label === "Temperature" ? null : 0, 
+                            y: {
+                                min: label === "Temperature" ? null : 0,
                                 max: label === "Temperature" ? null : 1,
                                 ticks: { color: "#555" },
-                                grid: { color: "#DDD" } 
+                                grid: { color: "#DDD" }
                             }
                         },
                         plugins: {
@@ -203,24 +202,25 @@
         })();
     </script>
 
-<audio id="fireAlarmSound" src="{{ url_for('static', filename='alarm.mp3') }}"></audio>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <audio id="fireAlarmSound" src="{{ url_for('static', filename='alarm.mp3') }}"></audio>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm1.js') }}"></script>
-<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm2.js') }}"></script>
-<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm3.js') }}"></script>
-<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm4.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm1.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm2.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm3.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm4.js') }}"></script>
 
-<!-- Optional: unlock audio autoplay -->
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const audio = document.getElementById("fireAlarmSound");
-        document.addEventListener("click", () => {
-            audio.play().catch(() => {});
-            audio.pause();
-        }, { once: true });
-    });
-</script>
+    <!-- Optional: unlock audio autoplay -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("fireAlarmSound");
+            document.addEventListener("click", () => {
+                audio.play().catch(() => { });
+                audio.pause();
+            }, { once: true });
+        });
+    </script>
 
 </body>
+
 </html>
