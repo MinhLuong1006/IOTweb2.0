@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Alarm Event Log</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        button { margin: 10px; padding: 10px 15px; font-size: 16px; }
+        #deleteButton { background-color: red; color: white; border: none; }
+    </style>
+</head>
+<body>
+
+    <h2>Fire Alarm Event Log of Room 4</h2>
+    
+    <table id="logTable">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Room</th>
+                <th>Event</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Logs will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <button onclick="downloadExcel()">📥 Download as Excel</button>
+    <button id="deleteButton">🗑️ Delete All Logs</button>
+
+    <!-- Firebase SDK (Modular Version) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, onChildAdded, remove } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB-ENheeyuJs8GFQVzFNq1silxSIQk8TbM",
+            authDomain: "esp32-fire-alarm-a8fc5.firebaseapp.com",
+            databaseURL: "https://esp32-fire-alarm-a8fc5-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "esp32-fire-alarm-a8fc5",
+            storageBucket: "esp32-fire-alarm-a8fc5.firebasestorage.app",
+            messagingSenderId: "138078759671",
+            appId: "1:138078759671:web:06b4af915ffd11839681f2",
+            measurementId: "G-ZZW6Q5DB2S"
+            };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const logsRef = ref(database, "room_logs/Room4");
+
+        // Function to Add Logs to Table
+        function addLogToTable(timestamp, room, event) {
+            const tableBody = document.querySelector("#logTable tbody");
+            let newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+                <td>${timestamp}</td>
+                <td>${room}</td>
+                <td>${event}</td>
+            `;
+
+            tableBody.appendChild(newRow);
+        }
+
+        // 📡 Listen for New Logs in Real Time
+        onChildAdded(logsRef, (snapshot) => {
+            const log = snapshot.val();
+            addLogToTable(log.timestamp, log.room, log.event);
+        });
+
+        // 🗑️ Function to Delete All Logs
+        document.getElementById("deleteButton").addEventListener("click", () => {
+            if (confirm("⚠️ Are you sure you want to delete all event logs? This action cannot be undone!")) {
+                remove(logsRef).then(() => {
+                    alert("✅ All event logs have been deleted.");
+                    document.querySelector("#logTable tbody").innerHTML = ""; // Clear table
+                }).catch((error) => {
+                    alert("❌ Error deleting logs: " + error.message);
+                });
+            }
+        });
+
+        // Export Logs to Excel
+        window.downloadExcel = function () {
+            let table = document.getElementById("logTable");
+            let wb = XLSX.utils.book_new();
+            let ws = XLSX.utils.aoa_to_sheet([["Timestamp (GMT+7)", "Room", "Event"]]); // Header
+
+            let rows = document.querySelectorAll("#logTable tbody tr");
+
+            rows.forEach(row => {
+                let cells = row.querySelectorAll("td");
+                let timestampText = cells[0].textContent; // Original timestamp as string
+
+                // Convert to JavaScript Date
+                let timestamp = new Date(timestampText);
+
+                // Adjust to GMT+7 manually
+                timestamp.setHours(timestamp.getHours() + 7);  
+
+                // Format as "YYYY-MM-DD HH:MM:SS"
+                let formattedTimestamp = timestamp.toISOString().replace("T", " ").substring(0, 19);
+
+                XLSX.utils.sheet_add_aoa(ws, [[formattedTimestamp, cells[1].textContent, cells[2].textContent]], { origin: -1 });
+            });
+
+            // Ensure proper column width
+            ws["!cols"] = [{ wch: 25 }, { wch: 10 }, { wch: 20 }];
+
+            XLSX.utils.book_append_sheet(wb, ws, "Event Logs");
+            XLSX.writeFile(wb, "Room4_Log.xlsx");
+        };
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<audio id="fireAlarmSound" src="{{ url_for('static', filename='alarm.mp3') }}"></audio>
+<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm1.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm2.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm3.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm4.js') }}"></script>
+</body>
+</html>

@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room 1</title>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     <style>
         body {
             display: flex;
@@ -68,6 +72,17 @@
         </div>
     </div>
 
+<<<<<<< Updated upstream
+=======
+    <div class="building-box"> 
+        <a href="{{url_for('building1')}}" class="slider-link"><b>Back to Building 1</b></a>
+    </div>
+
+    <div class="building-box"> 
+        <a href="{{url_for('event_log_r1')}}" class="slider-link">Events</a>
+    </div>
+
+>>>>>>> Stashed changes
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
@@ -172,6 +187,31 @@
             script.onload = loadCharts;
             document.head.appendChild(script);
         })();
+        
     </script>
+<<<<<<< Updated upstream
+=======
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<audio id="fireAlarmSound" src="{{ url_for('static', filename='alarm.mp3') }}"></audio>
+<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm1.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm2.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm3.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm4.js') }}"></script>
+<!-- Optional: unlock audio autoplay -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const audio = document.getElementById("fireAlarmSound");
+        document.addEventListener("click", () => {
+            audio.play().catch(() => {});
+            audio.pause();
+        }, { once: true });
+    });
+</script>
+
+>>>>>>> Stashed changes
 </body>
 </html>

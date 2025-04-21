@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Panel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-info {
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        form {
+            margin: 0;
+        }
+    </style>
+    <script>
+        function confirmDelete(username) {
+            return confirm("Are you sure you want to delete user '" + username + "'?");
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Manage Users</h2>
+    <ul>
+        {% for user in users %}
+            <li>
+                <span class="user-info">{{ user.username }} ({{ user.email }})</span>
+                <form method="POST" action="{{ url_for('delete_user') }}"
+                      onsubmit="return confirmDelete('{{ user.username }}');">
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

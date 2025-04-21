@@ -1,0 +1,22 @@
+#@app.route("/check_alarm2")
+#def check_alarm2():
+#    global last_email_time  # Use the global variable
+#    alarm2 = db.reference("/alarm2").get()
+
+#    current_time = time.time()
+#    if alarm2 == 1 and current_time - last_email_time > COOLDOWN_PERIOD:
+#        # Load users to get the registered email
+#        global users, emails
+#        users, emails = load_users()
+
+        # Send an email alert to all users
+#        for username, email in emails.items():
+#            send_fire_alert2(email)
+
+#    return jsonify({"alarm2": alarm2})
+
+# Function to send a fire alert email
+#def send_fire_alert2(email):
+#    msg = Message("🔥 Room2 Fire Alert!", recipients=[email])
+#    msg.body = "Fire detected in Room 2! Please check immediately."
+#    mail.send(msg)

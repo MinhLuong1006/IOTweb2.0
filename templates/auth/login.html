@@ -71,9 +71,10 @@
 
               <label for="password"><b>Password:</b></label>
               <div class="input-with-icon">
-                <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Enter your password" id="password" name="password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword()" style="margin-left: 10px; cursor: pointer;"></i>
               </div>
+              
               <button type="submit" id="but2"><b>Sign in</b></button>
             </form>
             </p>
@@ -145,9 +146,28 @@
     setInterval(nextMember, 3000);
   </script>
 
+<<<<<<< Updated upstream
 
 
 
+=======
+<script>
+  function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.querySelector('.toggle-password');
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleIcon.classList.remove("fa-eye-slash");
+      toggleIcon.classList.add("fa-eye");
+    } else {
+      passwordInput.type = "password";
+      toggleIcon.classList.remove("fa-eye");
+      toggleIcon.classList.add("fa-eye-slash");
+    }
+  }
+</script>
+>>>>>>> Stashed changes
   <!-- jQery -->
   <script src="{{ url_for('static',filename='scripts/jquery-3.4.1.min.js') }}"></script>
   <!-- bootstrap js -->

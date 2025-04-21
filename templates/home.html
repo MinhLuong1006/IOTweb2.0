@@ -137,6 +137,11 @@
   <!-- custom js -->
   <script src="{{ url_for('static',filename='scripts/custom.js') }}"></script>
 
+  <audio id="fireAlarmSound" src="{{ url_for('static', filename='alarm.mp3') }}"></audio>
+  <script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm1.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm2.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm3.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='scripts/alarm/alarm4.js') }}"></script>
 </body>
 
 </html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <a href="/dashboard">
+        <button type="button" style="
+            margin-top: 10px;
+            background: #6c757d;
+        ">Back to Dashboard</button>
+    </a>
+    <meta charset="UTF-8">
+    <title>Fire Alarm Control</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f8f9fa;
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .room-control {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select {
+            padding: 6px 10px;
+            margin-left: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Admin Fire Alarm Manual Control</h2>
+    <form method="POST">
+        {% for room, state in status.items() %}
+            {% if room.endswith('_manu') %}
+            <div class="room-control">
+                <label for="{{ room }}">{{ room|capitalize }}:</label>
+                <select name="{{ room }}" id="{{ room }}">
+                    <option value="1" {% if state == 1 %}selected{% endif %}>ON</option>
+                    <option value="0" {% if state == 0 %}selected{% endif %}>NEU</option>
+                    <option value="-1" {% if state == -1 %}selected{% endif %}>OFF</option>
+                </select>
+            </div>
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Update Alarm States</button>
+    </form>
+</body>
+</html>
