@@ -73,7 +73,7 @@ The project utilizes the following Arduino-compatible hardware:
 
 ### Development Tools
 
--   **IDEs**: Visual Studio Code, PyCharm
+-   **IDEs**: Visual Studio Code, Arduino
     
 -   **Version Control**: Git, GitHub
     
