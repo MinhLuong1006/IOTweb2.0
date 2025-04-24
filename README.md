@@ -57,4 +57,11 @@ To set up the system locally:
 
 **Note:** Ensure that you have Python installed on your system and that all dependencies are properly configured.
 
+**Project Details:**
+
+- **Primary Programming Language:** Python
+- **Primary IDE:** Visual Studio Code (VS Code)
+- **Primary Framework:** Flask
+- **Database and Authentication:** Firebase
+
 For more details, visit the [GitHub repository](https://github.com/MinhLuong1006/IOTweb2.0) and the [live web application](https://vgufirealarm.pythonanywhere.com/).
