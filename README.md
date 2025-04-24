@@ -1,9 +1,8 @@
-
-# IOTweb2.0
+# 🔥 IoT Real-time Fire Detection Project
 
 ## Overview
 
-**IOTweb2.0** is a web-based application designed for Internet of Things (IoT) device management and monitoring. The project integrates a Flask backend with a responsive frontend to facilitate real-time data visualization and control of connected devices.
+IOTweb2.0 is a web-based application designed for Internet of Things (IoT) device management and monitoring. The project integrates a Flask backend with a responsive frontend to facilitate real-time data visualization and control of connected devices.
 
 ## Features
 
@@ -15,20 +14,52 @@
     
 -   **Responsive Design**: Optimized for various screen sizes and devices.
     
+-   **Arduino Integration**: Sensor data collection and transmission using ESP32-based microcontrollers.
+    
+
+## Hardware Components
+
+The project utilizes the following Arduino-compatible hardware:
+
+-   2x **ESP32 Devkit V1** boards (Wi-Fi enabled microcontrollers)
+    
+-   2x **ESP32 GPIO Expanders** for additional input/output pins
+    
+-   4x **MQ4 Gas Sensors** for detecting methane and other gases
+    
+-   4x **DS18B20 Temperature Sensors** for precise temperature readings
+    
+-   4x **Flame Sensors** to detect fire or high-heat sources
+    
+-   Jumper wires and breadboards for circuit connections
+    
+
+### Arduino Functionality
+
+-   The ESP32 boards collect sensor data (gas, temperature, flame) and transmit it to the Flask backend using HTTP or Firebase.
+    
+-   Each `.ino` file (Arduino sketch) defines logic for initializing sensors, connecting to Wi-Fi, and sending data.
+    
+-   Example sketches:
+    
+    -   `firebasetest1.ino`: Manages sensor input and sends data to Firebase.
+        
+    -   `firebasetest2.ino`: Secondary board support or sensor expansion.
+        
 
 ## Technologies Used
 
 ### Programming Languages
 
--   **HTML** (61.3%): Structure of web pages.
+-   **HTML (61.3%)**: Structure of web pages.
     
--   **CSS** (22.8%): Styling and layout.
+-   **CSS (22.8%)**: Styling and layout.
     
--   **SCSS** (9.7%): Enhanced CSS with variables and nesting.
+-   **SCSS (9.7%)**: Enhanced CSS with variables and nesting.
     
--   **Python** (5.6%): Backend logic and server-side operations.
+-   **Python (5.6%)**: Backend logic and server-side operations.
     
--   **JavaScript** (0.6%): Client-side interactivity.
+-   **JavaScript (0.6%)**: Client-side interactivity.
     
 
 ### Frameworks and Libraries
@@ -37,58 +68,17 @@
     
 -   **Jinja2**: Templating engine used with Flask for dynamic HTML rendering.
     
--   **Bootstrap**: CSS framework for responsive design (assumed based on common practices).
+-   **Bootstrap**: CSS framework for responsive design.
     
 
 ### Development Tools
 
--   **Integrated Development Environments (IDEs)**:
+-   **IDEs**: Visual Studio Code, PyCharm
     
-    -   _Visual Studio Code_: Versatile code editor suitable for both frontend and backend development.
-        
-    -   _PyCharm_: IDE tailored for Python development.
-        
--   **Version Control**:
+-   **Version Control**: Git, GitHub
     
-    -   _Git_: Distributed version control system.
-        
-    -   _GitHub_: Hosting platform for version control and collaboration.
-        
 
-## Installation
 
-1.  **Clone the Repository**:
-    
-    ```bash
-    git clone https://github.com/MinhLuong1006/IOTweb2.0.git
-    cd IOTweb2.0
-    
-    ```
-    
-2.  **Create a Virtual Environment**:
-    
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    
-    ```
-    
-3.  **Install Dependencies**:
-    
-    ```bash
-    pip install -r requirements.txt
-    
-    ```
-    
-4.  **Run the Application**:
-    
-    ```bash
-    python app.py
-    
-    ```
-    
-5.  **Access the Application**: Open your web browser and navigate to `http://localhost:5000`.
-    
 
 ## Project Structure
 
@@ -97,28 +87,27 @@ IOTweb2.0/
 ├── app.py
 ├── requirements.txt
 ├── templates/
-│   └── ... (HTML templates)
 ├── static/
-│   ├── css/
-│   ├── js/
-│   └── ... (Static assets)
 ├── users.txt
 ├── alarm.mp3
-└── README.md
+├── README.md
+└── Arduino/
+    ├── firebasetest1.ino
+    └── firebasetest2.ino
 
 ```
 
 -   `app.py`: Main Flask application file.
     
--   `requirements.txt`: Lists Python dependencies.
+-   `templates/`: HTML templates rendered by Flask.
     
--   `templates/`: Contains HTML templates rendered by Flask.
+-   `static/`: CSS, JS, and static assets.
     
--   `static/`: Holds static files like CSS, JavaScript, and images.
+-   `users.txt`: Stores user credentials.
     
--   `users.txt`: Stores user credentials or related data.
+-   `alarm.mp3`: Audio alert file.
     
--   `alarm.mp3`: Audio file used within the application.
+-   `Arduino/`: Contains Arduino sketches for ESP32 devices.
     
 
 ## Contributing
